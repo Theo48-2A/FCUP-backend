@@ -1,7 +1,7 @@
 services:
   server:
     build:
-      context: ./backend
+      context: ./app
     container_name: server_container
     ports:
       - ${SRV_PORT}:${SRV_PORT} 
