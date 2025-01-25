@@ -1,6 +1,10 @@
 # Utiliser une image Python comme base
 FROM python:3.11-slim-bookworm
 
+# Définir les arguments de build
+ARG SRV_PORT
+ARG SRV_LISTEN_ADDR
+
 # Installer les dépendances système
 RUN apt-get update && apt-get install -y libpq-dev gcc --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
@@ -15,11 +19,12 @@ COPY . /app
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Définir une variable d'environnement pour le port
-ENV SRV_PORT=8000
+ENV SRV_PORT=${SRV_PORT}
+ENV SRV_LISTEN_ADDR=${SRV_LISTEN_ADDR}
 
 # Exposer le port défini par la variable d'environnement
 EXPOSE ${SRV_PORT}
 
 # Définir la commande par défaut pour exécuter Django
-CMD ["gunicorn", "--bind", "0.0.0.0:${SRV_PORT}", "app.wsgi:application"]
+CMD ["gunicorn", "--bind", "${SRV_LISTEN_ADDR}:${SRV_PORT}", "app.wsgi:application"]
 
