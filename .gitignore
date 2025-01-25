@@ -17,3 +17,7 @@ db_data/
 # Python virtual environment
 app/FCUP_backend_dev_venv/
 
+# Caches Python
+__pycache__/
+*.pyc
+

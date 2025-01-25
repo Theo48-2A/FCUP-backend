@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'authentication',
 ]
 
 MIDDLEWARE = [
@@ -75,8 +76,12 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'user_db',  # Correspond à DB_NAME dans ton .env
+        'USER': 'theo',  # Correspond à DB_USER dans ton .env
+        'PASSWORD': 'yourpassword',  # Correspond à DB_PASSWORD dans ton .env
+        'HOST': 'db',  # Correspond au service "db" dans docker-compose
+        'PORT': '5432',  # Correspond à DB_PORT dans ton .env
     }
 }
 
