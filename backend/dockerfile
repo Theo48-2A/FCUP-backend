@@ -1,0 +1,25 @@
+# Utiliser une image Python comme base
+FROM python:3.11-slim-bookworm
+
+# Installer les dépendances système
+RUN apt-get update && apt-get install -y libpq-dev gcc --no-install-recommends && \
+    rm -rf /var/lib/apt/lists/*
+
+# Définir le répertoire de travail
+WORKDIR /app
+
+# Copier les fichiers du projet dans le conteneur
+COPY . /app
+
+# Installer les dépendances Python
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Définir une variable d'environnement pour le port
+ENV SRV_PORT=8000
+
+# Exposer le port défini par la variable d'environnement
+EXPOSE ${SRV_PORT}
+
+# Définir la commande par défaut pour exécuter Django
+CMD ["gunicorn", "--bind", "0.0.0.0:${SRV_PORT}", "app.wsgi:application"]
+

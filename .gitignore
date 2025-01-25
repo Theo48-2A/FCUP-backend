@@ -1,0 +1,20 @@
+# Node.js (Client React)
+client/node_modules/
+client/build/
+
+# Docker
+*.env
+*.env.*
+docker-compose.override.yml
+
+# Logs et fichiers temporaires
+*.log
+*.lock
+.DS_Store
+
+# PostgreSQL
+db_data/
+
+# IDE pycharm
+*.idea
+
