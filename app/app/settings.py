@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+from app.core.config import Config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -19,14 +20,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-k2+b&6$-%70c22nozjy2jlr(n!rg1qp(q9v=7_e+o7x7m-_z!t'
-
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = Config.APP_ENV == 'development'
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -74,16 +71,18 @@ WSGI_APPLICATION = 'app.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# Base de données
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'user_db',  # Correspond à DB_NAME dans ton .env
-        'USER': 'theo',  # Correspond à DB_USER dans ton .env
-        'PASSWORD': 'yourpassword',  # Correspond à DB_PASSWORD dans ton .env
-        'HOST': 'db',  # Correspond au service "db" dans docker-compose
-        'PORT': '5432',  # Correspond à DB_PORT dans ton .env
+        'NAME': Config.DB_NAME,
+        'USER': Config.DB_USER,
+        'PASSWORD': Config.DB_PASSWORD,
+        'HOST': Config.DB_IP,
+        'PORT': Config.DB_PORT,
     }
 }
+
 
 
 # Password validation
