@@ -10,8 +10,8 @@ class Config:
     def get_env_var(var_name):
         """Récupérer une variable d'environnement ou lever une exception."""
         value = os.getenv(var_name)
-        if value is None:
-            raise ConfigError(f"La variable d'environnement '{var_name}' est manquante.")
+        #if value is None:
+        #    raise ConfigError(f"La variable d'environnement '{var_name}' est manquante.")
         return value
 
     # Environnement de l'application
