@@ -23,6 +23,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = Config.APP_ENV == 'development'
 
+SECRET_KEY = Config.SECRET_KEY
+
 ALLOWED_HOSTS = []
 
 # Application definition
@@ -35,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'authentication',
+    'management_tools',
 ]
 
 MIDDLEWARE = [
