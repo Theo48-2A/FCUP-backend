@@ -1,7 +1,3 @@
-# Node.js (Client React)
-client/node_modules/
-client/build/
-
 # Docker
 *.env
 *.env.*
@@ -17,4 +13,7 @@ db_data/
 
 # IDE pycharm
 *.idea
+
+# Python virtual environment
+app/FCUP_backend_dev_venv/
 
