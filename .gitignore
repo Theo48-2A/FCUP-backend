@@ -21,3 +21,5 @@ app/FCUP_backend_dev_venv/
 __pycache__/
 *.pyc
 
+*tree.txt
+
