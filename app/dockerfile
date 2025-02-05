@@ -1,8 +1,9 @@
 # Utiliser une image Python comme base
 FROM python:3.11-slim-bookworm
 
-# Installer les dépendances système
-RUN apt-get update && apt-get install -y libpq-dev gcc --no-install-recommends && \
+# Installer les dépendances système (libpq-dev, curl et gcc)
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends libpq-dev curl gcc && \
     rm -rf /var/lib/apt/lists/*
 
 # Définir le répertoire de travail

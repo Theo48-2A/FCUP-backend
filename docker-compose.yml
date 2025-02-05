@@ -26,11 +26,10 @@ services:
     volumes:
       - media:/app/media
     healthcheck:
-      test: [ "CMD-SHELL", "curl -f http://localhost:${SRV_PORT}/health || exit 1" ]
+      test: [ "CMD", "curl", "-f", "http://localhost:${SRV_PORT}/health/" ]
       interval: 10s
       retries: 5
       timeout: 5s
-
 
   db:
     image: postgres:17
@@ -62,10 +61,9 @@ services:
     environment:
       NGINX_INTERNAL_PORT: ${NGINX_INTERNAL_PORT}
       NGINX_EXTERNAL_PORT: ${NGINX_EXTERNAL_PORT}
+      SRV_PORT: ${SRV_PORT}
     volumes:
       - media:/app/media:ro
-
-
 
 volumes:
   postgres_data:
