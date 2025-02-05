@@ -25,6 +25,12 @@ services:
       SECRET_KEY: ${SECRET_KEY}
     volumes:
       - media:/app/media
+    healthcheck:
+      test: [ "CMD-SHELL", "curl -f http://localhost:${SRV_PORT}/health || exit 1" ]
+      interval: 10s
+      retries: 5
+      timeout: 5s
+
 
   db:
     image: postgres:17
@@ -42,6 +48,24 @@ services:
       interval: 5s
       retries: 5
       timeout: 3s
+  nginx:
+    build:
+      context: ./nginx
+    container_name: nginx_container
+    ports:
+      - "${NGINX_EXTERNAL_PORT}:${NGINX_INTERNAL_PORT}"
+    depends_on:
+      server:
+        condition: service_healthy
+    networks:
+      - app-network
+    environment:
+      NGINX_INTERNAL_PORT: ${NGINX_INTERNAL_PORT}
+      NGINX_EXTERNAL_PORT: ${NGINX_EXTERNAL_PORT}
+    volumes:
+      - media:/app/media:ro
+
+
 
 volumes:
   postgres_data:
