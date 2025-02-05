@@ -39,7 +39,7 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_NAME}
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - ./postgres_data:/var/lib/postgresql/data
     networks:
       - app-network
     healthcheck:
@@ -64,9 +64,6 @@ services:
       SRV_PORT: ${SRV_PORT}
     volumes:
       - ./media:/app/media:ro
-
-volumes:
-  postgres_data:
 
 networks:
   app-network:

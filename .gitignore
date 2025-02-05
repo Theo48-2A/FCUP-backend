@@ -23,3 +23,15 @@ __pycache__/
 
 *tree.txt
 
+# Le contenu de la bdd
+postgres_data/
+
+# Ignorer tout le contenu du dossier media/
+media/*
+
+# Mais garder le dossier avatars et son contenu spécifique
+!media/avatars/
+!media/avatars/default.jpg
+!media/.gitkeep
+
+
