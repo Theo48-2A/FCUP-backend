@@ -24,7 +24,7 @@ services:
       SENDGRID_API_KEY: ${SENDGRID_API_KEY}
       SECRET_KEY: ${SECRET_KEY}
     volumes:
-      - media:/app/media
+      - ./media:/app/media
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:${SRV_PORT}/health/" ]
       interval: 10s
@@ -63,11 +63,10 @@ services:
       NGINX_EXTERNAL_PORT: ${NGINX_EXTERNAL_PORT}
       SRV_PORT: ${SRV_PORT}
     volumes:
-      - media:/app/media:ro
+      - ./media:/app/media:ro
 
 volumes:
   postgres_data:
-  media:
 
 networks:
   app-network:
