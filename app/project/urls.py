@@ -21,4 +21,7 @@ from django.urls import include, path
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('authentication.urls')),  # Ajouter les routes d'authentification
+    path('profiles/', include('profiles.urls')),  # Routes API pour les profils
 ]
+
+

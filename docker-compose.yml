@@ -4,9 +4,10 @@ services:
       context: ./app
     container_name: server_container
     ports:
-      - ${SRV_PORT}:${SRV_PORT} 
+      - ${SRV_PORT}:${SRV_PORT}
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     networks:
       - app-network
     environment:
@@ -22,6 +23,9 @@ services:
       DB_NAME: ${DB_NAME}
       SENDGRID_API_KEY: ${SENDGRID_API_KEY}
       SECRET_KEY: ${SECRET_KEY}
+    volumes:
+      - media:/app/media
+
   db:
     image: postgres:17
     container_name: postgres_container
@@ -33,9 +37,15 @@ services:
       - postgres_data:/var/lib/postgresql/data
     networks:
       - app-network
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}" ]
+      interval: 5s
+      retries: 5
+      timeout: 3s
 
 volumes:
   postgres_data:
+  media:
 
 networks:
   app-network:

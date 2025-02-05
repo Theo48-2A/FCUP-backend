@@ -5,5 +5,5 @@ class ProfilesConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'profiles'
 
-    #def ready(self):
-    #    import profiles.signals  # Enregistre les signaux au démarrage de Django
+    def ready(self):
+        import profiles.signals  # Enregistre les signaux au démarrage de Django

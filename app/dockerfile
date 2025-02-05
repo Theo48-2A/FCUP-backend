@@ -17,6 +17,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 CMD if [ "$APP_ENV" = "development" ]; then \
         echo "Environnement : développement" && \
         cd /app && \
+        python manage.py makemigrations && \
         python manage.py migrate && \
         echo "Lancement des tests..." && \
         pytest --maxfail=1 --disable-warnings && \
